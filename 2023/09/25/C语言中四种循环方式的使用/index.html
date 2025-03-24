@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="一、for循环语法结构： 123for (语句1; 语句2; 语句3) &#123;    循环体&#125;  执行流程：  执行初始化语句语句1 检查条件语句2是否成立 条件成立时执行循环体 执行迭代语句语句3 重复步骤2-4直到条件不成立  示例程序： 12345678910&#x2F;* 计算1+2+3+4+5的值 *&#x2F;#include &lt;stdio.h&gt;int main()&#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言中四种循环方式的使用">
+<meta property="og:url" content="http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Finland的个人博客">
+<meta property="og:description" content="一、for循环语法结构： 123for (语句1; 语句2; 语句3) &#123;    循环体&#125;  执行流程：  执行初始化语句语句1 检查条件语句2是否成立 条件成立时执行循环体 执行迭代语句语句3 重复步骤2-4直到条件不成立  示例程序： 12345678910&#x2F;* 计算1+2+3+4+5的值 *&#x2F;#include &lt;stdio.h&gt;int main()&#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-25T12:25:17.000Z">
+<meta property="article:modified_time" content="2025-03-24T10:15:29.888Z">
+<meta property="article:author" content="Finland">
+<meta property="article:tag" content="c语言, 新手入门">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>C语言中四种循环方式的使用</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/09/22/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%85%B3%E4%BA%8Escanf%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&text=C语言中四种循环方式的使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=C语言中四种循环方式的使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C语言中四种循环方式的使用&body=Check out this article: http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&name=C语言中四种循环方式的使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&t=C语言中四种循环方式的使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81for%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.</span> <span class="toc-text">一、for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81while%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.</span> <span class="toc-text">二、while循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81do-while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">三、do-while循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">四、循环选择建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81goto%E5%AE%9E%E7%8E%B0%E5%BE%AA%E7%8E%AF%EF%BC%88%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五、goto实现循环（特殊用法）</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        C语言中四种循环方式的使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Finland</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-25T12:25:17.000Z" class="dt-published" itemprop="datePublished">2023-09-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/c%E8%AF%AD%E8%A8%80-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/" rel="tag">c语言, 新手入门</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="一、for循环"><a href="#一、for循环" class="headerlink" title="一、for循环"></a>一、for循环</h2><p><strong>语法结构</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (语句<span class="number">1</span>; 语句<span class="number">2</span>; 语句<span class="number">3</span>) &#123;</span><br><span class="line">    循环体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行流程</strong>：</p>
+<ol>
+<li>执行初始化语句<code>语句1</code></li>
+<li>检查条件<code>语句2</code>是否成立</li>
+<li>条件成立时执行循环体</li>
+<li>执行迭代语句<code>语句3</code></li>
+<li>重复步骤2-4直到条件不成立</li>
+</ol>
+<p><strong>示例程序</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 计算1+2+3+4+5的值 */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> all=<span class="number">0</span>,i;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=<span class="number">5</span>,i++;)&#123;</span><br><span class="line">        all+=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, all);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>流程框图示意</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[初始化i=1] → [i&lt;=5?] → [是] → [all+=i] → [i++]</span><br><span class="line">                ↓否</span><br><span class="line">              [输出结果]</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、while循环"><a href="#二、while循环" class="headerlink" title="二、while循环"></a>二、while循环</h2><p><strong>语法结构</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(条件) &#123;</span><br><span class="line">    循环体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>等效实现</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> all=<span class="number">0</span>,i;</span><br><span class="line">    i=<span class="number">1</span>;         <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;=<span class="number">5</span>)&#123; <span class="comment">// 条件检查</span></span><br><span class="line">        all+=i;</span><br><span class="line">        i++;     <span class="comment">// 迭代</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,all);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>流程框图示意</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[初始化i=1] → [i&lt;=5?] → [是] → [all+=i] → [i++]</span><br><span class="line">                ↓否</span><br><span class="line">              [输出结果]</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、do-while循环"><a href="#三、do-while循环" class="headerlink" title="三、do-while循环"></a>三、do-while循环</h2><p><strong>语法结构</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    循环体</span><br><span class="line">&#125; <span class="keyword">while</span>(循环条件);</span><br></pre></td></tr></table></figure>
+
+<p><strong>核心特点</strong>：</p>
+<ul>
+<li>至少执行一次循环体</li>
+<li>后置条件检查</li>
+</ul>
+<p><strong>流程框图示意</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[执行循环体] → [条件成立?] → [是] → 重复执行</span><br><span class="line">                ↓否</span><br><span class="line">              [退出循环]</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、循环选择建议"><a href="#四、循环选择建议" class="headerlink" title="四、循环选择建议"></a>四、循环选择建议</h2><ol>
+<li><p><strong>for循环</strong>适用场景：</p>
+<ul>
+<li>明确的循环次数</li>
+<li>需要集中管理初始化&#x2F;条件&#x2F;迭代</li>
+</ul>
+</li>
+<li><p><strong>while循环</strong>优势：</p>
+<ul>
+<li>条件检查前置更安全</li>
+<li>适合不确定循环次数的场景</li>
+</ul>
+</li>
+<li><p><strong>do-while</strong>特殊用途：</p>
+<ul>
+<li>必须至少执行一次的操作</li>
+<li>输入验证等场景</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>注：当循环结构不明显时，优先选择while循环增强代码可读性</p>
+</blockquote>
+<h2 id="五、goto实现循环（特殊用法）"><a href="#五、goto实现循环（特殊用法）" class="headerlink" title="五、goto实现循环（特殊用法）"></a>五、goto实现循环（特殊用法）</h2><p><strong>标签跳转范式</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> i=<span class="number">1</span>, all=<span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">LOOP:  <span class="comment">// 标签声明</span></span><br><span class="line">    all += i;</span><br><span class="line">    i++;</span><br><span class="line">    <span class="keyword">if</span>(i &lt;= <span class="number">5</span>) <span class="keyword">goto</span> LOOP;</span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, all);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong>：</p>
+<ul>
+<li>可能造成代码逻辑混乱</li>
+<li>不符合结构化编程规范</li>
+<li>仅限特殊场景使用（如多重循环快速退出）</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81for%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.</span> <span class="toc-text">一、for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81while%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.</span> <span class="toc-text">二、while循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81do-while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">三、do-while循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%BE%AA%E7%8E%AF%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">四、循环选择建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81goto%E5%AE%9E%E7%8E%B0%E5%BE%AA%E7%8E%AF%EF%BC%88%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五、goto实现循环（特殊用法）</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&text=C语言中四种循环方式的使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=C语言中四种循环方式的使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C语言中四种循环方式的使用&body=Check out this article: http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&title=C语言中四种循环方式的使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&name=C语言中四种循环方式的使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/&t=C语言中四种循环方式的使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Finland
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

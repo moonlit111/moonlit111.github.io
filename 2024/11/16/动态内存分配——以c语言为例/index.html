@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="核心函数说明malloc 内存分配语法：(type *)malloc(size_in_bytes) 特性：  分配未初始化的内存块 需要手动计算总字节数 典型应用场景：结构体&#x2F;自定义类型分配  示例： 123456&#x2F;&#x2F; 分配整型数组int *arr &#x3D; (int *)malloc(5 * sizeof(int)); &#x2F;&#x2F; 分配结构体数组struct Film &#123; char ti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态内存分配——以c语言为例">
+<meta property="og:url" content="http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Finland的个人博客">
+<meta property="og:description" content="核心函数说明malloc 内存分配语法：(type *)malloc(size_in_bytes) 特性：  分配未初始化的内存块 需要手动计算总字节数 典型应用场景：结构体&#x2F;自定义类型分配  示例： 123456&#x2F;&#x2F; 分配整型数组int *arr &#x3D; (int *)malloc(5 * sizeof(int)); &#x2F;&#x2F; 分配结构体数组struct Film &#123; char ti">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-16T09:20:51.000Z">
+<meta property="article:modified_time" content="2025-03-24T10:31:11.463Z">
+<meta property="article:author" content="Finland">
+<meta property="article:tag" content="c语言, 初学者, 指针">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>动态内存分配——以c语言为例</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2025/03/24/%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%B9%B3%E5%8F%B0%E9%80%9A%E8%BF%87API%20key%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Deepseek%E6%9C%8D%E5%8A%A1/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2024/10/24/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&text=动态内存分配——以c语言为例"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&is_video=false&description=动态内存分配——以c语言为例"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=动态内存分配——以c语言为例&body=Check out this article: http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&name=动态内存分配——以c语言为例&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&t=动态内存分配——以c语言为例"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">核心函数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">1.1.</span> <span class="toc-text">malloc 内存分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#calloc-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">1.2.</span> <span class="toc-text">calloc 内存分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%A6%81%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">内存管理要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98"><span class="toc-number">2.1.</span> <span class="toc-text">释放内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.2.</span> <span class="toc-text">重要注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7"><span class="toc-number">3.</span> <span class="toc-text">高级技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">3.1.</span> <span class="toc-text">重新分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84"><span class="toc-number">3.2.</span> <span class="toc-text">结构体动态数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">内存操作函数</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        动态内存分配——以c语言为例
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Finland</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-11-16T09:20:51.000Z" class="dt-published" itemprop="datePublished">2024-11-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/c%E8%AF%AD%E8%A8%80-%E5%88%9D%E5%AD%A6%E8%80%85-%E6%8C%87%E9%92%88/" rel="tag">c语言, 初学者, 指针</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="核心函数说明"><a href="#核心函数说明" class="headerlink" title="核心函数说明"></a>核心函数说明</h2><h3 id="malloc-内存分配"><a href="#malloc-内存分配" class="headerlink" title="malloc 内存分配"></a>malloc 内存分配</h3><p><strong>语法</strong>：<br><code>(type *)malloc(size_in_bytes)</code></p>
+<p><strong>特性</strong>：</p>
+<ul>
+<li>分配未初始化的内存块</li>
+<li>需要手动计算总字节数</li>
+<li>典型应用场景：结构体&#x2F;自定义类型分配</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分配整型数组</span></span><br><span class="line"><span class="type">int</span> *arr = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="type">int</span>)); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 分配结构体数组</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Film</span> &#123;</span> <span class="type">char</span> title[<span class="number">100</span>]; <span class="type">int</span> year; &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Film</span> *<span class="title">films</span> =</span> (<span class="keyword">struct</span> Film *)<span class="built_in">malloc</span>(<span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Film));</span><br></pre></td></tr></table></figure>
+
+<h3 id="calloc-内存分配"><a href="#calloc-内存分配" class="headerlink" title="calloc 内存分配"></a>calloc 内存分配</h3><p><strong>语法</strong>：<br><code>(type *)calloc(element_count, element_size)</code></p>
+<p><strong>特性</strong>：</p>
+<ul>
+<li>自动初始化内存为全0</li>
+<li>更直观的元素数量指定方式</li>
+<li>典型应用场景：需要初始化的数值数组</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分配并初始化整型数组（全0）</span></span><br><span class="line"><span class="type">int</span> *arr = (<span class="type">int</span> *)<span class="built_in">calloc</span>(<span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="内存管理要点"><a href="#内存管理要点" class="headerlink" title="内存管理要点"></a>内存管理要点</h2><h3 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">free</span>(pointer);  <span class="comment">// 正确写法（注意参数是指针本身）</span></span><br><span class="line"><span class="comment">// free(*pointer); ❌ 错误写法！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="重要注意事项"><a href="#重要注意事项" class="headerlink" title="重要注意事项"></a>重要注意事项</h3><ol>
+<li><strong>空指针检查</strong></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *arr = <span class="built_in">malloc</span>(<span class="number">1000</span>);</span><br><span class="line"><span class="keyword">if</span>(arr == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;内存分配失败！&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>内存泄漏防护</strong></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每次分配后记录</span></span><br><span class="line"><span class="type">int</span> *ptr = <span class="built_in">malloc</span>(<span class="number">100</span>);</span><br><span class="line"><span class="comment">// ...使用内存...</span></span><br><span class="line"><span class="built_in">free</span>(ptr);  <span class="comment">// 使用后立即释放</span></span><br><span class="line">ptr = <span class="literal">NULL</span>; <span class="comment">// 避免悬垂指针</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>最佳实践对比</strong><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>malloc</th>
+<th>calloc</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始化需求</td>
+<td>需手动memset</td>
+<td>自动初始化为0</td>
+</tr>
+<tr>
+<td>大数据量分配</td>
+<td>更快（无初始化开销）</td>
+<td>较慢（带初始化）</td>
+</tr>
+<tr>
+<td>多维数组分配</td>
+<td>需要复杂计算</td>
+<td>直观指定元素数量</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h2 id="高级技巧"><a href="#高级技巧" class="headerlink" title="高级技巧"></a>高级技巧</h2><h3 id="重新分配内存"><a href="#重新分配内存" class="headerlink" title="重新分配内存"></a>重新分配内存</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *arr = <span class="built_in">malloc</span>(<span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">arr = <span class="built_in">realloc</span>(arr, <span class="number">10</span> * <span class="keyword">sizeof</span>(<span class="type">int</span>));  <span class="comment">// 扩展为10个元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="结构体动态数组"><a href="#结构体动态数组" class="headerlink" title="结构体动态数组"></a>结构体动态数组</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">50</span>];</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125; Person;</span><br><span class="line"></span><br><span class="line">Person *group = <span class="built_in">malloc</span>(<span class="number">10</span> * <span class="keyword">sizeof</span>(Person));</span><br><span class="line">group[<span class="number">0</span>].age = <span class="number">25</span>;  <span class="comment">// 访问第一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内存操作函数"><a href="#内存操作函数" class="headerlink" title="内存操作函数"></a>内存操作函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *arr = <span class="built_in">calloc</span>(<span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="built_in">memset</span>(arr, <span class="number">-1</span>, <span class="number">5</span> * <span class="keyword">sizeof</span>(<span class="type">int</span>));  <span class="comment">// 全部设置为-1</span></span><br><span class="line"><span class="built_in">memcpy</span>(dest, src, <span class="keyword">sizeof</span>(data));    <span class="comment">// 内存块复制</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>重要提示</strong>：所有动态分配的内存都来自堆区，使用完毕后必须通过free()释放，否则会造成内存泄漏！</p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">核心函数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">1.1.</span> <span class="toc-text">malloc 内存分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#calloc-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="toc-number">1.2.</span> <span class="toc-text">calloc 内存分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E8%A6%81%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">内存管理要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98"><span class="toc-number">2.1.</span> <span class="toc-text">释放内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.2.</span> <span class="toc-text">重要注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7"><span class="toc-number">3.</span> <span class="toc-text">高级技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="toc-number">3.1.</span> <span class="toc-text">重新分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%8A%A8%E6%80%81%E6%95%B0%E7%BB%84"><span class="toc-number">3.2.</span> <span class="toc-text">结构体动态数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">3.3.</span> <span class="toc-text">内存操作函数</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&text=动态内存分配——以c语言为例"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&is_video=false&description=动态内存分配——以c语言为例"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=动态内存分配——以c语言为例&body=Check out this article: http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=动态内存分配——以c语言为例"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&name=动态内存分配——以c语言为例&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/11/16/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&t=动态内存分配——以c语言为例"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Finland
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

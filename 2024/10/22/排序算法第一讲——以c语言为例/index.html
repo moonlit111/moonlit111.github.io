@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="If I have been able to see further, it was only because I stood on the shoulders of giants.  一、冒泡排序（BubbleSort）实现方法：重复遍历数组，纠正顺序不正确的元素每次排序后，最大的数会”冒”到数组的末尾 时间复杂度：O(n) 到 O(n²)，由数组中已经有序的元素个数决定 稳定性：稳定 123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法第一讲——以c语言为例">
+<meta property="og:url" content="http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="Finland的个人博客">
+<meta property="og:description" content="If I have been able to see further, it was only because I stood on the shoulders of giants.  一、冒泡排序（BubbleSort）实现方法：重复遍历数组，纠正顺序不正确的元素每次排序后，最大的数会”冒”到数组的末尾 时间复杂度：O(n) 到 O(n²)，由数组中已经有序的元素个数决定 稳定性：稳定 123">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-22T15:05:19.000Z">
+<meta property="article:modified_time" content="2025-03-24T10:20:00.620Z">
+<meta property="article:author" content="Finland">
+<meta property="article:tag" content="c语言, 初学者, 算法基础">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>排序算法第一讲——以c语言为例</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2024/10/24/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/09/25/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%9B%9B%E7%A7%8D%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&text=排序算法第一讲——以c语言为例"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&is_video=false&description=排序算法第一讲——以c语言为例"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=排序算法第一讲——以c语言为例&body=Check out this article: http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&name=排序算法第一讲——以c语言为例&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&t=排序算法第一讲——以c语言为例"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%88BubbleSort%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、冒泡排序（BubbleSort）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">二、插入排序</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        排序算法第一讲——以c语言为例
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Finland</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-22T15:05:19.000Z" class="dt-published" itemprop="datePublished">2024-10-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/c%E8%AF%AD%E8%A8%80-%E5%88%9D%E5%AD%A6%E8%80%85-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" rel="tag">c语言, 初学者, 算法基础</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>If I have been able to see further, it was only because I stood on the shoulders of giants.</p>
+</blockquote>
+<h2 id="一、冒泡排序（BubbleSort）"><a href="#一、冒泡排序（BubbleSort）" class="headerlink" title="一、冒泡排序（BubbleSort）"></a>一、冒泡排序（BubbleSort）</h2><p><strong>实现方法</strong>：<br>重复遍历数组，纠正顺序不正确的元素<br>每次排序后，最大的数会”冒”到数组的末尾</p>
+<p><strong>时间复杂度</strong>：<br><code>O(n)</code> 到 <code>O(n²)</code>，由数组中已经有序的元素个数决定</p>
+<p><strong>稳定性</strong>：稳定</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">bubbleSort</span><span class="params">(<span class="type">int</span> *arr, <span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> i,j,temp;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)&#123;     <span class="comment">//n-1是因为怕数组越界</span></span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n<span class="number">-1</span>-i;j++)&#123;       <span class="comment">//n-1-i是因为每次冒泡都会把最大的数放到最后，所以不用再比较</span></span><br><span class="line">            <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;        <span class="comment">//如果前一个元素大于后一个元素，就交换</span></span><br><span class="line">                temp=arr[j];</span><br><span class="line">                arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">                arr[j+<span class="number">1</span>]=temp;      <span class="comment">//交换</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="type">int</span> *arr=(<span class="type">int</span> *)<span class="built_in">malloc</span>(n*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    bubbleSort(arr,n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">free</span>(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、插入排序"><a href="#二、插入排序" class="headerlink" title="二、插入排序"></a>二、插入排序</h2><p><strong>实现方法</strong>：</p>
+<ol>
+<li>从第一个元素开始，该元素可以认为已经被排序</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描</li>
+<li>如果该元素（已排序）大于新元素，将该元素移到下一位置</li>
+<li>重复步骤 3，直到找到已排序的元素小于或等于新元素的位置</li>
+<li>将新元素插入到该位置后</li>
+<li>重复步骤 2~5</li>
+</ol>
+<p><strong>时间复杂度</strong>：<br><code>O(n)</code> 到 <code>O(n²)</code>，由数组中已经有序的元素个数决定</p>
+<p><strong>稳定性</strong>：稳定</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertionSort</span><span class="params">(<span class="type">int</span> *arr,<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;       <span class="comment">//i=1是因为第一个元素默认是有序的</span></span><br><span class="line">        <span class="type">int</span> key=arr[i];     <span class="comment">//key是要插入的元素</span></span><br><span class="line">        <span class="type">int</span> j=i<span class="number">-1</span>;      <span class="comment">//j=i-1是因为要和前一个元素比较</span></span><br><span class="line">        <span class="keyword">while</span>(j&gt;=<span class="number">0</span> &amp;&amp; arr[j]&gt;key)&#123;      <span class="comment">//条件1：j&gt;=0是为了防止数组越界，条件2：arr[j]&gt;key是为了找到key应该插入的位置</span></span><br><span class="line">            arr[j+<span class="number">1</span>]=arr[j];    <span class="comment">//将大于key的元素后移</span></span><br><span class="line">            j--;        <span class="comment">//继续向前比较</span></span><br><span class="line">        &#125;</span><br><span class="line">        arr[j+<span class="number">1</span>]=key;       <span class="comment">//将key插入到合适的位置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="type">int</span> *arr=(<span class="type">int</span> *)<span class="built_in">malloc</span>(n*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    insertionSort(arr,n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">free</span>(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>未完待续···</strong></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%88BubbleSort%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、冒泡排序（BubbleSort）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">二、插入排序</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&text=排序算法第一讲——以c语言为例"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&is_video=false&description=排序算法第一讲——以c语言为例"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=排序算法第一讲——以c语言为例&body=Check out this article: http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&title=排序算法第一讲——以c语言为例"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&name=排序算法第一讲——以c语言为例&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/22/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2%E2%80%94%E2%80%94%E4%BB%A5c%E8%AF%AD%E8%A8%80%E4%B8%BA%E4%BE%8B/&t=排序算法第一讲——以c语言为例"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    Finland
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/moonlit111">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
