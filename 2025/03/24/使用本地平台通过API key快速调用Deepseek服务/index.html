@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="前言在人工智能技术飞速发展的今天，大语言模型的本地化部署与调用已成为开发者提升效率的新趋势。Deepseek作为国内领先的AI服务平台，其API接口不仅提供媲美云端的高效推理能力，更能通过本地化调用实现数据闭环管理和响应速度的质的飞跃。本文将手把手演示如何在Windows&#x2F;Android&#x2F;iOS&#x2F;macOS几大平台环境下，通过简单的API key配置实现快速且准确的D">
+    <meta name="description" content="一. 选择API key提供商，并购买API key额度以下提供商依照个人喜好排序 1. 火山引擎 优点：极其低价（咸鱼0.5CNY-&gt;30CNY代金券）、较快的响应速度 缺点：Chatbox对其支持较差、容易犯傻（貌似不是严格意义上的满血）  2. 硅基流动 优点：响应速度快、与官网一致的满血体验 缺点：价格较贵（新用户送14CNY代金券）  3. 深度求索 优点：与官网一致的满血体验、官">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用开源软件Chatbox和Cherry Studio通过API key快速调用Deepseek服务">
 <meta property="og:url" content="http://example.com/2025/03/24/%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%B9%B3%E5%8F%B0%E9%80%9A%E8%BF%87API%20key%E5%BF%AB%E9%80%9F%E8%B0%83%E7%94%A8Deepseek%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="Finland的个人博客">
-<meta property="og:description" content="前言在人工智能技术飞速发展的今天，大语言模型的本地化部署与调用已成为开发者提升效率的新趋势。Deepseek作为国内领先的AI服务平台，其API接口不仅提供媲美云端的高效推理能力，更能通过本地化调用实现数据闭环管理和响应速度的质的飞跃。本文将手把手演示如何在Windows&#x2F;Android&#x2F;iOS&#x2F;macOS几大平台环境下，通过简单的API key配置实现快速且准确的D">
+<meta property="og:description" content="一. 选择API key提供商，并购买API key额度以下提供商依照个人喜好排序 1. 火山引擎 优点：极其低价（咸鱼0.5CNY-&gt;30CNY代金券）、较快的响应速度 缺点：Chatbox对其支持较差、容易犯傻（貌似不是严格意义上的满血）  2. 硅基流动 优点：响应速度快、与官网一致的满血体验 缺点：价格较贵（新用户送14CNY代金券）  3. 深度求索 优点：与官网一致的满血体验、官">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-24T05:39:19.000Z">
-<meta property="article:modified_time" content="2025-03-24T10:10:08.371Z">
+<meta property="article:modified_time" content="2025-03-24T14:23:13.955Z">
 <meta property="article:author" content="Finland">
 <meta property="article:tag" content="大语言模型, Deepseek">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%80%89%E6%8B%A9API-key%E6%8F%90%E4%BE%9B%E5%95%86%EF%BC%8C%E5%B9%B6%E8%B4%AD%E4%B9%B0API-key%E9%A2%9D%E5%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">一. 选择API key提供商，并购买API key额度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E"><span class="toc-number">1.1.</span> <span class="toc-text">1. 火山引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%85%E5%9F%BA%E6%B5%81%E5%8A%A8"><span class="toc-number">1.2.</span> <span class="toc-text">2. 硅基流动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%B1%E5%BA%A6%E6%B1%82%E7%B4%A2"><span class="toc-number">1.3.</span> <span class="toc-text">3. 深度求索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8D%83%E5%B8%86"><span class="toc-number">1.4.</span> <span class="toc-text">4. 百度云千帆</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -158,7 +158,28 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在人工智能技术飞速发展的今天，大语言模型的本地化部署与调用已成为开发者提升效率的新趋势。Deepseek作为国内领先的AI服务平台，其API接口不仅提供媲美云端的高效推理能力，更能通过本地化调用实现数据闭环管理和响应速度的质的飞跃。本文将手把手演示如何在Windows&#x2F;Android&#x2F;iOS&#x2F;macOS几大平台环境下，通过简单的API key配置实现快速且准确的Deepseek服务调用。</p>
+    <h2 id="一-选择API-key提供商，并购买API-key额度"><a href="#一-选择API-key提供商，并购买API-key额度" class="headerlink" title="一. 选择API key提供商，并购买API key额度"></a>一. 选择API key提供商，并购买API key额度</h2><p><strong>以下提供商依照个人喜好排序</strong></p>
+<h3 id="1-火山引擎"><a href="#1-火山引擎" class="headerlink" title="1. 火山引擎"></a>1. 火山引擎</h3><ul>
+<li>优点：极其低价（咸鱼0.5CNY-&gt;30CNY代金券）、较快的响应速度</li>
+<li>缺点：Chatbox对其支持较差、容易犯傻（貌似不是严格意义上的满血）</li>
+</ul>
+<h3 id="2-硅基流动"><a href="#2-硅基流动" class="headerlink" title="2. 硅基流动"></a>2. 硅基流动</h3><ul>
+<li>优点：响应速度快、与官网一致的满血体验</li>
+<li>缺点：价格较贵（新用户送14CNY代金券）</li>
+</ul>
+<h3 id="3-深度求索"><a href="#3-深度求索" class="headerlink" title="3. 深度求索"></a>3. 深度求索</h3><ul>
+<li>优点：与官网一致的满血体验、官方提供的API key</li>
+<li>缺点：响应速度慢、没有送代金券、价格较贵</li>
+</ul>
+<h3 id="4-百度云千帆"><a href="#4-百度云千帆" class="headerlink" title="4. 百度云千帆"></a>4. 百度云千帆</h3><ul>
+<li>优点：响应速度快</li>
+<li>缺点：价格跟官方一致，但模型疑似非满血、价格较贵</li>
+</ul>
+<p>建议：</p>
+<ol>
+<li>根据个人喜好，选择2-3个API key提供商</li>
+<li>一部分提供商未体验过（如阿里云百练、腾讯混元），此处不予置评按需选择</li>
+</ol>
 
   </div>
 </article>
@@ -186,7 +207,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%80%89%E6%8B%A9API-key%E6%8F%90%E4%BE%9B%E5%95%86%EF%BC%8C%E5%B9%B6%E8%B4%AD%E4%B9%B0API-key%E9%A2%9D%E5%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">一. 选择API key提供商，并购买API key额度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E"><span class="toc-number">1.1.</span> <span class="toc-text">1. 火山引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%85%E5%9F%BA%E6%B5%81%E5%8A%A8"><span class="toc-number">1.2.</span> <span class="toc-text">2. 硅基流动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%B1%E5%BA%A6%E6%B1%82%E7%B4%A2"><span class="toc-number">1.3.</span> <span class="toc-text">3. 深度求索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8D%83%E5%B8%86"><span class="toc-number">1.4.</span> <span class="toc-text">4. 百度云千帆</span></a></li></ol></li></ol>
       </div>
     
 
