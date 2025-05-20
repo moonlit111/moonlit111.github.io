@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="网络空间安全导论实践-Road Show-Project-doc-v1.0-2025-05-18目录一.在个人电脑上安装Kali Linux（以虚拟机环境为例）二.无线网卡的配置与使用教程三.使用Airodump监听附近的无线局域网四.使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程五.使用Hashcat和密码字典对数据包进行破解，获得密码在个人电脑上安装Kali Linux（以虚拟">
+    <meta name="description" content="目录 在个人电脑上安装Kali Linux（以虚拟机环境为例） 无线网卡的配置与使用教程 使用Airodump监听附近的无线局域网 使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程 使用Hashcat和密码字典对数据包进行破解，获得密码  1. 在个人电脑上安装Kali Linux（以虚拟机环境为例）1.1 安装VMware Workstation Pro 下载 VMware Wor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Kali Linux与Hashcat进行Wifi密码的破解">
 <meta property="og:url" content="http://example.com/2025/05/20/Linux%E4%B8%8EHashcat%E8%BF%9B%E8%A1%8CWifi%E5%AF%86%E7%A0%81%E7%9A%84%E7%A0%B4%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Finland的个人博客">
-<meta property="og:description" content="网络空间安全导论实践-Road Show-Project-doc-v1.0-2025-05-18目录一.在个人电脑上安装Kali Linux（以虚拟机环境为例）二.无线网卡的配置与使用教程三.使用Airodump监听附近的无线局域网四.使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程五.使用Hashcat和密码字典对数据包进行破解，获得密码在个人电脑上安装Kali Linux（以虚拟">
+<meta property="og:description" content="目录 在个人电脑上安装Kali Linux（以虚拟机环境为例） 无线网卡的配置与使用教程 使用Airodump监听附近的无线局域网 使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程 使用Hashcat和密码字典对数据包进行破解，获得密码  1. 在个人电脑上安装Kali Linux（以虚拟机环境为例）1.1 安装VMware Workstation Pro 下载 VMware Wor">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img.sysgeek.cn/img/2023/10/vmware-17.jpg">
 <meta property="og:image" content="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p2.jpeg">
@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b1.png">
 <meta property="og:image" content="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea088.png">
 <meta property="article:published_time" content="2025-05-20T07:29:45.000Z">
-<meta property="article:modified_time" content="2025-05-20T08:05:28.331Z">
+<meta property="article:modified_time" content="2025-05-20T08:17:37.496Z">
 <meta property="article:author" content="Finland">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img.sysgeek.cn/img/2023/10/vmware-17.jpg">
@@ -149,7 +149,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E5%AF%BC%E8%AE%BA%E5%AE%9E%E8%B7%B5-Road-Show-Project-doc-v1-0-2025-05-18"><span class="toc-number">1.</span> <span class="toc-text">网络空间安全导论实践-Road Show-Project-doc-v1.0-2025-05-18</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9C%A8%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux%EF%BC%88%E4%BB%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">一.在个人电脑上安装Kali Linux（以虚拟机环境为例）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">二.无线网卡的配置与使用教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E4%BD%BF%E7%94%A8Airodump%E7%9B%91%E5%90%AC%E9%99%84%E8%BF%91%E7%9A%84%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">2.3.</span> <span class="toc-text">三.使用Airodump监听附近的无线局域网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E4%BD%BF%E7%94%A8Aireplay%E6%94%BB%E5%87%BB%E5%AF%B9%E6%96%B9%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8A%A0%E5%BF%AB%E6%8A%93%E5%8C%85%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.4.</span> <span class="toc-text">四.使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E4%BD%BF%E7%94%A8Hashcat%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%9B%E8%A1%8C%E7%A0%B4%E8%A7%A3%EF%BC%8C%E8%8E%B7%E5%BE%97%E5%AF%86%E7%A0%81"><span class="toc-number">2.5.</span> <span class="toc-text">五.使用Hashcat和密码字典对数据包进行破解，获得密码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux%EF%BC%88%E4%BB%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">在个人电脑上安装Kali Linux（以虚拟机环境为例）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85VMware-Workstation-Pro"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装VMware Workstation Pro</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-VMware-Workstation-Pro-%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%89%88"><span class="toc-number">3.1.1.</span> <span class="toc-text">下载 VMware Workstation Pro 个人免费版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-Windows-%E4%B8%8A%E5%AE%89%E8%A3%85-VMware-Workstation-Pro"><span class="toc-number">3.1.2.</span> <span class="toc-text">在 Windows 上安装 VMware Workstation Pro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8VMware%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux"><span class="toc-number">3.1.3.</span> <span class="toc-text">在VMware上安装Kali Linux</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">无线网卡的配置与使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B4%AD%E4%B9%B0%E9%80%82%E7%94%A8%E4%BA%8EKali-Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E7%9A%84%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">4.1.</span> <span class="toc-text">1.购买适用于Kali Linux虚拟机环境使用的无线网卡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%90%AF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">4.2.</span> <span class="toc-text">2.启用无线网卡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A1%AE%E8%AE%A4%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E8%AE%BE%E7%BD%AE%E6%AD%A3%E7%A1%AE"><span class="toc-number">4.3.</span> <span class="toc-text">3.确认无线网卡设置正确</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Airodump%E7%9B%91%E5%90%AC%E9%99%84%E8%BF%91%E7%9A%84%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85"><span class="toc-number">5.</span> <span class="toc-text">使用Airodump监听附近的无线局域网并进行抓包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Aireplay%E6%94%BB%E5%87%BB%E5%AF%B9%E6%96%B9%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8A%A0%E5%BF%AB%E6%8A%93%E5%8C%85%E8%BF%9B%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Hashcat%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%9B%E8%A1%8C%E7%A0%B4%E8%A7%A3%EF%BC%8C%E8%8E%B7%E5%BE%97%E5%AF%86%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">使用Hashcat和密码字典对数据包进行破解，获得密码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E6%AD%A4%E6%AD%A5%E9%AA%A4%E9%9C%80%E8%A6%81%E8%89%AF%E5%A5%BD%E7%9A%84GPU%E6%94%AF%E6%8C%81%E6%89%8D%E8%83%BD%E5%BF%AB%E9%80%9F%E5%AE%8C%E6%88%90"><span class="toc-number">7.1.</span> <span class="toc-text">注意：此步骤需要良好的GPU支持才能快速完成</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9C%A8%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux%EF%BC%88%E4%BB%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">1. 在个人电脑上安装Kali Linux（以虚拟机环境为例）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85VMware-Workstation-Pro"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 安装VMware Workstation Pro</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-VMware-Workstation-Pro-%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%89%88"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载 VMware Workstation Pro 个人免费版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8-Windows-%E4%B8%8A%E5%AE%89%E8%A3%85-VMware-Workstation-Pro"><span class="toc-number">2.1.2.</span> <span class="toc-text">在 Windows 上安装 VMware Workstation Pro</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9C%A8VMware%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 在VMware上安装Kali Linux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">2. 无线网卡的配置与使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%B4%AD%E4%B9%B0%E9%80%82%E7%94%A8%E4%BA%8EKali-Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E7%9A%84%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 购买适用于Kali Linux虚拟机环境使用的无线网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%90%AF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 启用无线网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%A1%AE%E8%AE%A4%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E8%AE%BE%E7%BD%AE%E6%AD%A3%E7%A1%AE"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 确认无线网卡设置正确</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8Airodump%E7%9B%91%E5%90%AC%E9%99%84%E8%BF%91%E7%9A%84%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">3. 使用Airodump监听附近的无线局域网并进行抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8Aireplay%E6%94%BB%E5%87%BB%E5%AF%B9%E6%96%B9%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8A%A0%E5%BF%AB%E6%8A%93%E5%8C%85%E8%BF%9B%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">4. 使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BD%BF%E7%94%A8Hashcat%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%9B%E8%A1%8C%E7%A0%B4%E8%A7%A3%EF%BC%8C%E8%8E%B7%E5%BE%97%E5%AF%86%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text">5. 使用Hashcat和密码字典对数据包进行破解，获得密码</span></a></li></ol>
       </div>
     
   </span>
@@ -189,182 +189,189 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h1 id="网络空间安全导论实践-Road-Show-Project-doc-v1-0-2025-05-18"><a href="#网络空间安全导论实践-Road-Show-Project-doc-v1-0-2025-05-18" class="headerlink" title="网络空间安全导论实践-Road Show-Project-doc-v1.0-2025-05-18"></a>网络空间安全导论实践-Road Show-Project-doc-v1.0-2025-05-18</h1><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="一-在个人电脑上安装Kali-Linux（以虚拟机环境为例）"><a href="#一-在个人电脑上安装Kali-Linux（以虚拟机环境为例）" class="headerlink" title="一.在个人电脑上安装Kali Linux（以虚拟机环境为例）"></a>一.在个人电脑上安装Kali Linux（以虚拟机环境为例）</h2><h2 id="二-无线网卡的配置与使用教程"><a href="#二-无线网卡的配置与使用教程" class="headerlink" title="二.无线网卡的配置与使用教程"></a>二.无线网卡的配置与使用教程</h2><h2 id="三-使用Airodump监听附近的无线局域网"><a href="#三-使用Airodump监听附近的无线局域网" class="headerlink" title="三.使用Airodump监听附近的无线局域网"></a>三.使用Airodump监听附近的无线局域网</h2><h2 id="四-使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程"><a href="#四-使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程" class="headerlink" title="四.使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程"></a>四.使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</h2><h2 id="五-使用Hashcat和密码字典对数据包进行破解，获得密码"><a href="#五-使用Hashcat和密码字典对数据包进行破解，获得密码" class="headerlink" title="五.使用Hashcat和密码字典对数据包进行破解，获得密码"></a>五.使用Hashcat和密码字典对数据包进行破解，获得密码</h2><h1 id="在个人电脑上安装Kali-Linux（以虚拟机环境为例）"><a href="#在个人电脑上安装Kali-Linux（以虚拟机环境为例）" class="headerlink" title="在个人电脑上安装Kali Linux（以虚拟机环境为例）"></a>在个人电脑上安装Kali Linux（以虚拟机环境为例）</h1><h2 id="1-安装VMware-Workstation-Pro"><a href="#1-安装VMware-Workstation-Pro" class="headerlink" title="1.安装VMware Workstation Pro"></a>1.安装VMware Workstation Pro</h2><p><img src="https://img.sysgeek.cn/img/2023/10/vmware-17.jpg"></p>
-<h3 id="下载-VMware-Workstation-Pro-个人免费版"><a href="#下载-VMware-Workstation-Pro-个人免费版" class="headerlink" title="下载 VMware Workstation Pro 个人免费版"></a><strong>下载 VMware Workstation Pro 个人免费版</strong></h3><ol>
-<li><p>访问 <a target="_blank" rel="noopener" href="https://profile.broadcom.com/web/registration">Broadcom 注册页面</a>，通过邮箱注册或登录你的账户。</p>
+    <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li>在个人电脑上安装Kali Linux（以虚拟机环境为例）</li>
+<li>无线网卡的配置与使用教程</li>
+<li>使用Airodump监听附近的无线局域网</li>
+<li>使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</li>
+<li>使用Hashcat和密码字典对数据包进行破解，获得密码</li>
+</ol>
+<h2 id="1-在个人电脑上安装Kali-Linux（以虚拟机环境为例）"><a href="#1-在个人电脑上安装Kali-Linux（以虚拟机环境为例）" class="headerlink" title="1. 在个人电脑上安装Kali Linux（以虚拟机环境为例）"></a>1. 在个人电脑上安装Kali Linux（以虚拟机环境为例）</h2><h3 id="1-1-安装VMware-Workstation-Pro"><a href="#1-1-安装VMware-Workstation-Pro" class="headerlink" title="1.1 安装VMware Workstation Pro"></a>1.1 安装VMware Workstation Pro</h3><p><img src="https://img.sysgeek.cn/img/2023/10/vmware-17.jpg" alt="VMware Workstation Pro 界面"></p>
+<h4 id="下载-VMware-Workstation-Pro-个人免费版"><a href="#下载-VMware-Workstation-Pro-个人免费版" class="headerlink" title="下载 VMware Workstation Pro 个人免费版"></a>下载 VMware Workstation Pro 个人免费版</h4><ol>
+<li><p>访问 <a target="_blank" rel="noopener" href="https://profile.broadcom.com/web/registration">Broadcom 注册页面</a>，通过邮箱注册或登录你的账户。</p>
 </li>
 <li><p>依次选择「Software」&gt;「VMware Cloud Foundation」&gt;「My Downloads」。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p2.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p2.jpeg" alt="选择下载路径"></p>
 </li>
 <li><p>在右侧找到并选择「VMware Workstation Pro」。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p3.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p3.jpeg" alt="选择VMware Workstation Pro"></p>
 </li>
 <li><p>展开「VMware Workstation Pro 17.0 for Personal Use (Windows)」，并选择最新版本，例如 17.5.2。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p4.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p4.jpeg" alt="选择最新版本"></p>
 </li>
 <li><p>勾选「I agree to Broadcom Terms and Conditions」，并点击「下载」按钮开始下载。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p5.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p5.jpeg" alt="同意条款并下载"></p>
 </li>
 </ol>
-<h3 id="在-Windows-上安装-VMware-Workstation-Pro"><a href="#在-Windows-上安装-VMware-Workstation-Pro" class="headerlink" title="在 Windows 上安装 VMware Workstation Pro"></a><strong>在 Windows 上安装 VMware Workstation Pro</strong></h3><ol>
+<h4 id="在-Windows-上安装-VMware-Workstation-Pro"><a href="#在-Windows-上安装-VMware-Workstation-Pro" class="headerlink" title="在 Windows 上安装 VMware Workstation Pro"></a>在 Windows 上安装 VMware Workstation Pro</h4><ol>
 <li><p>双击打开 VMware Workstation Pro 的安装文件。</p>
 </li>
-<li><p>点击「下一步」，勾选「我接受许可协议中的条款」，再点击「下一步」。<br><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p6.jpeg"><br><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p7.jpeg"></p>
+<li><p>点击「下一步」，勾选「我接受许可协议中的条款」，再点击「下一步」。</p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p6.jpeg" alt="安装步骤1"><br><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p7.jpeg" alt="安装步骤2"></p>
 </li>
-<li><p>勾选「增强型键盘驱动程序」和「将 VMware Workstation 控制台工具添加到系统 PATH」，然后点击「下一步」。 </p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p8.jpeg"></p>
+<li><p>勾选「增强型键盘驱动程序」和「将 VMware Workstation 控制台工具添加到系统 PATH」，然后点击「下一步」。</p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p8.jpeg" alt="安装步骤3"></p>
 </li>
 <li><p>勾选「启动时检查产品更新」并取消「加入 VMware 客户体验提升计划」，然后点击「下一步」。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p9.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p9.jpeg" alt="安装步骤4"></p>
 </li>
 <li><p>勾选在「桌面」和「开始菜单程序文件夹」中创建快捷方式，然后点击「下一步」。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p10.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p10.jpeg" alt="安装步骤5"></p>
 </li>
 <li><p>点击「安装」开始安装 VMware Workstation Pro。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p11.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p11.jpeg" alt="安装步骤6"></p>
 </li>
 <li><p>点击「完成」并重启计算机。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p12.jpeg"></p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p13.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p12.jpeg" alt="安装步骤7"><br><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p13.jpeg" alt="安装步骤8"></p>
 </li>
 <li><p>在首次启动时，选择「将 VMware Workstation 17 用于个人用途」，点击「继续」，最后点击「完成」。</p>
-<p> <img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p14.jpeg"></p>
+<p><img src="https://img.sysgeek.cn/img/2024/05/install-vmware-workstation-pro-p14.jpeg" alt="首次启动设置"></p>
 </li>
 <li><p>完成这些步骤后，你就可以愉快地使用 VMware Workstation Pro 个人免费版了。</p>
 </li>
 </ol>
-<p>转载自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/EthanS/p/18211302">**VMware Workstation Pro 个人免费版下载及安装指南</a>（**<a target="_blank" rel="noopener" href="https://www.cnblogs.com/EthanS/p/18211302">https://www.cnblogs.com/EthanS/p/18211302</a>）</p>
-<h3 id="在VMware上安装Kali-Linux"><a href="#在VMware上安装Kali-Linux" class="headerlink" title="在VMware上安装Kali Linux"></a><strong>在VMware上安装Kali Linux</strong></h3><ol>
+<blockquote>
+<p>转载自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/EthanS/p/18211302"><strong>VMware Workstation Pro 个人免费版下载及安装指南</strong></a></p>
+</blockquote>
+<h3 id="1-2-在VMware上安装Kali-Linux"><a href="#1-2-在VMware上安装Kali-Linux" class="headerlink" title="1.2 在VMware上安装Kali Linux"></a>1.2 在VMware上安装Kali Linux</h3><ol>
 <li><p>从Kali Linux官网（<a target="_blank" rel="noopener" href="https://www.kali.org/">https://www.kali.org</a>）下载并获取适用于VMware虚拟机的预加载版本</p>
-<p> <img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b6.jpg" alt="IMG_3816.jpeg"></p>
-<p> <img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b7.jpg" alt="IMG_3817.jpeg"></p>
-<p> <img src="https://pic1.imgdb.cn/item/682c33c058cb8da5c8fea3d7.jpg" alt="IMG_3818.jpeg"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b6.jpg" alt="Kali Linux下载页面1"><br><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b7.jpg" alt="Kali Linux下载页面2"><br><img src="https://pic1.imgdb.cn/item/682c33c058cb8da5c8fea3d7.jpg" alt="Kali Linux下载页面3"></p>
 </li>
 <li><p>启动VMware虚拟机</p>
-<p> <img src="https://www.kali.org/docs/virtualization/import-premade-vmware/import-vmware-1.png"></p>
+<p><img src="https://www.kali.org/docs/virtualization/import-premade-vmware/import-vmware-1.png" alt="VMware主界面"></p>
 </li>
 <li><p>在这里，我们需要选择”打开虚拟机”。然后导航到我们下载Kali的位置，找到<code>.vmx</code>文件：</p>
-<p> <img src="https://www.kali.org/docs/virtualization/import-premade-vmware/import-vmware-2.png"></p>
+<p><img src="https://www.kali.org/docs/virtualization/import-premade-vmware/import-vmware-2.png" alt="选择vmx文件"></p>
 </li>
 <li><p>现在导入完成，点击中间栏上方的start up即可启动虚拟机</p>
-<p> <img src="https://www.kali.org/docs/virtualization/import-premade-vmware/import-vmware-3.png"></p>
+<p><img src="https://www.kali.org/docs/virtualization/import-premade-vmware/import-vmware-3.png" alt="启动虚拟机"></p>
 </li>
-<li><p>在这里，我们可以验证并修改虚拟机的设置。确认无误后，我们就可以启动虚拟机并正常使用了。、</p>
+<li><p>在这里，我们可以验证并修改虚拟机的设置。确认无误后，我们就可以启动虚拟机并正常使用了。</p>
 </li>
 <li><p>请记住默认的登录用户名是kali，密码也是kali！</p>
 </li>
 </ol>
-<h1 id="无线网卡的配置与使用教程"><a href="#无线网卡的配置与使用教程" class="headerlink" title="无线网卡的配置与使用教程"></a>无线网卡的配置与使用教程</h1><h2 id="1-购买适用于Kali-Linux虚拟机环境使用的无线网卡"><a href="#1-购买适用于Kali-Linux虚拟机环境使用的无线网卡" class="headerlink" title="1.购买适用于Kali Linux虚拟机环境使用的无线网卡"></a>1.购买适用于Kali Linux虚拟机环境使用的无线网卡</h2><p>各大电商平台均可买到，此处不再赘述</p>
-<h2 id="2-启用无线网卡"><a href="#2-启用无线网卡" class="headerlink" title="2.启用无线网卡"></a>2.启用无线网卡</h2><p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b9.png" alt="image.png"></p>
+<h2 id="2-无线网卡的配置与使用教程"><a href="#2-无线网卡的配置与使用教程" class="headerlink" title="2. 无线网卡的配置与使用教程"></a>2. 无线网卡的配置与使用教程</h2><h3 id="2-1-购买适用于Kali-Linux虚拟机环境使用的无线网卡"><a href="#2-1-购买适用于Kali-Linux虚拟机环境使用的无线网卡" class="headerlink" title="2.1 购买适用于Kali Linux虚拟机环境使用的无线网卡"></a>2.1 购买适用于Kali Linux虚拟机环境使用的无线网卡</h3><p>各大电商平台均可买到，此处不再赘述</p>
+<h3 id="2-2-启用无线网卡"><a href="#2-2-启用无线网卡" class="headerlink" title="2.2 启用无线网卡"></a>2.2 启用无线网卡</h3><p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b9.png" alt="VMware连接无线网卡"></p>
 <p>在VMware上方的工具栏，依次点击VM→Removeable device→[无线网卡名称]→Connect(Disconnect from host)，在弹出的框中选择是，即可完成无线网卡的连接</p>
-<h2 id="3-确认无线网卡设置正确"><a href="#3-确认无线网卡设置正确" class="headerlink" title="3.确认无线网卡设置正确"></a>3.确认无线网卡设置正确</h2><p>使用kali linux自带的终端</p>
-<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea090.png" alt="image.png"></p>
+<h3 id="2-3-确认无线网卡设置正确"><a href="#2-3-确认无线网卡设置正确" class="headerlink" title="2.3 确认无线网卡设置正确"></a>2.3 确认无线网卡设置正确</h3><p>使用kali linux自带的终端</p>
+<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea090.png" alt="Kali Linux终端"></p>
 <p>输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br><span class="line">iwconfig</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08e.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08e.png" alt="网卡配置检查"></p>
 <p>按照如下顺序检查输出结果</p>
 <ol>
-<li><p>确认网卡已接入Kali虚拟机：检查ifconfig命令的输出结果，若输出wlan0,wlan0mon等，则证明网卡已接入</p>
-</li>
-<li><p>检查网卡是否处于监听模式：检查iwconfig命令的输出结果，若输出Mode: monitor，则证明网卡处于监听模式，否则，请按照以下步骤操作：</p>
-<ol>
+<li>确认网卡已接入Kali虚拟机：检查ifconfig命令的输出结果，若输出wlan0,wlan0mon等，则证明网卡已接入</li>
+<li>检查网卡是否处于监听模式：检查iwconfig命令的输出结果，若输出Mode: monitor，则证明网卡处于监听模式，否则，请按照以下步骤操作：<ol>
 <li><p>获取管理员权限，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> -i</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> -i</span><br></pre></td></tr></table></figure>
 <p>并紧跟其后输入密码，密码默认为kali，输入密码时不显示任何字符为正常现象，输入完按Enter确认即可</p>
 </li>
 <li><p>卸载设备，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig wlan0 down</span><br><span class="line"><span class="comment">#此处一般是wlan0，详见ifconfig的输出</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig wlan0 down</span><br><span class="line"><span class="comment">#此处一般是wlan0，详见ifconfig的输出</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置监听模式，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwconfig wlan0 mode monitor</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwconfig wlan0 mode monitor</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重新安装设备，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig wlan0 up</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig wlan0 up</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p> 操作后，再次输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwconfig</span><br></pre></td></tr></table></figure>
-<p> 检查输出结果中Mode是否被正确设置</p>
-<p> <img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08d.png" alt="image.png"></p>
-<p> 这样我们就成功完成了网卡模式的切换</p>
 </li>
 </ol>
-<h1 id="使用Airodump监听附近的无线局域网并进行抓包"><a href="#使用Airodump监听附近的无线局域网并进行抓包" class="headerlink" title="使用Airodump监听附近的无线局域网并进行抓包"></a>使用Airodump监听附近的无线局域网并进行抓包</h1><ol>
+<p>操作后，再次输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iwconfig</span><br></pre></td></tr></table></figure>
+
+<p>检查输出结果中Mode是否被正确设置</p>
+<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08d.png" alt="监听模式确认"></p>
+<p>这样我们就成功完成了网卡模式的切换</p>
+<h2 id="3-使用Airodump监听附近的无线局域网并进行抓包"><a href="#3-使用Airodump监听附近的无线局域网并进行抓包" class="headerlink" title="3. 使用Airodump监听附近的无线局域网并进行抓包"></a>3. 使用Airodump监听附近的无线局域网并进行抓包</h2><ol>
 <li><p>关闭影响监听的进程</p>
 <ol>
 <li><p>输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng check</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng check</span><br></pre></td></tr></table></figure>
 <p>发现有影响监听的进程存在</p>
-<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08b.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08b.png" alt="检查进程"></p>
 </li>
 <li><p>输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng check <span class="built_in">kill</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng check <span class="built_in">kill</span></span><br></pre></td></tr></table></figure>
 <p>清理掉影响监听的进程</p>
-<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08c.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea08c.png" alt="清理进程"></p>
 </li>
 </ol>
 </li>
 <li><p>开始监听，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br><span class="line"><span class="comment">#此处的wlan0为Interface名称，一般是wlan0或者wlan0mon，具体可输入airmon-ng查询</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br><span class="line"><span class="comment">#此处的wlan0为Interface名称，一般是wlan0或者wlan0mon，具体可输入airmon-ng查询</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea353.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea353.png" alt="开始监听"></p>
 </li>
 <li><p>开始扫描，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0</span><br></pre></td></tr></table></figure>
-
-<p>若长时间扫描不到wifi，可尝试在VM菜单中关闭无线网卡（参见步骤二），然后再次启用，重新配置无线网卡后再试、</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0</span><br></pre></td></tr></table></figure>
+<p>若长时间扫描不到wifi，可尝试在VM菜单中关闭无线网卡（参见步骤二），然后再次启用，重新配置无线网卡后再试。</p>
 <p>扫描到所要破解的无线局域网后，即可停止（按住Ctrl+C键）</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea350.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea350.png" alt="扫描WiFi"></p>
 </li>
 <li><p>开始抓取握手包：输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c [CH] --bssid [Bssid] -w [Location] [Interface]</span><br></pre></td></tr></table></figure>
-<p> 其中CH为信道，Location为握手包存放位置，Interface为输入airmon-ng后查询到的结果</p>
-<p> 例如，要抓取这个名为TestWifiHost的WiFi的握手包，应当输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c 11 --bssid F2:F9:92:74:6E:E1 -w /home/kali/Desktop/writtenbyfinland wlan0mon</span><br></pre></td></tr></table></figure>
-<p> <img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea34f.png" alt="image.png"></p>
-<p> 出现以上界面则说明抓包开始</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c [CH] --bssid [Bssid] -w [Location] [Interface]</span><br></pre></td></tr></table></figure>
+
+<p>其中CH为信道，Location为握手包存放位置，Interface为输入airmon-ng后查询到的结果</p>
+<p>例如，要抓取这个名为TestWifiHost的WiFi的握手包，应当输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c 11 --bssid F2:F9:92:74:6E:E1 -w /home/kali/Desktop/writtenbyfinland wlan0mon</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea34f.png" alt="抓取握手包"></p>
+<p>出现以上界面则说明抓包开始</p>
 </li>
 </ol>
-<h1 id="使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程"><a href="#使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程" class="headerlink" title="使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程"></a>使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</h1><ol>
-<li><p>原理：若仅仅只是等待其他设备连接Wifi获取握手包，通常情况下会消耗大量时间。利用Aireplay，通过发送大量的握手请求把其他设备踢下线，一般情况下线的设备都会自动重连 WiFi，这个时候就可以抓取到握手包了。</p>
+<h2 id="4-使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程"><a href="#4-使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程" class="headerlink" title="4. 使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程"></a>4. 使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</h2><ol>
+<li><p>原理：若仅仅只是等待其他设备连接Wifi获取握手包，通常情况下会消耗大量时间。利用Aireplay，通过发送大量的握手请求把其他设备踢下线，一般情况下线的设备都会自动重连WiFi，这个时候就可以抓取到握手包了。</p>
 </li>
 <li><p>注意：若STATION中没有任何内容，说明没有设备连接，则不能使用此方法</p>
 </li>
 <li><p>过程：打开一个新的终端，获取root权限，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 2 -a [Bssid] -c [MAC] [Interface]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 2 -a [Bssid] -c [MAC] [Interface]</span><br></pre></td></tr></table></figure>
 
 <p>其中：Bssid同上，MAC为已连接设备的MAC地址，即STATION栏下的内容，Interface同上</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea34b.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea34b.png" alt="Aireplay攻击"></p>
 </li>
 <li><p>当出现如下的WPA handshake内容时，说明抓包成功，可按Ctrl+C停止抓包</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea34d.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea34d.png" alt="握手包获取成功"></p>
 </li>
 </ol>
-<h1 id="使用Hashcat和密码字典对数据包进行破解，获得密码"><a href="#使用Hashcat和密码字典对数据包进行破解，获得密码" class="headerlink" title="使用Hashcat和密码字典对数据包进行破解，获得密码"></a>使用Hashcat和密码字典对数据包进行破解，获得密码</h1><h2 id="注意：此步骤需要良好的GPU支持才能快速完成"><a href="#注意：此步骤需要良好的GPU支持才能快速完成" class="headerlink" title="注意：此步骤需要良好的GPU支持才能快速完成"></a>注意：此步骤需要良好的GPU支持才能快速完成</h2><ol>
+<h2 id="5-使用Hashcat和密码字典对数据包进行破解，获得密码"><a href="#5-使用Hashcat和密码字典对数据包进行破解，获得密码" class="headerlink" title="5. 使用Hashcat和密码字典对数据包进行破解，获得密码"></a>5. 使用Hashcat和密码字典对数据包进行破解，获得密码</h2><blockquote>
+<p><strong>注意：此步骤需要良好的GPU支持才能快速完成</strong></p>
+</blockquote>
+<ol>
 <li><p>将抓取到的文件拖出VMware到一个新的文件夹中</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea355.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33b258cb8da5c8fea355.png" alt="导出握手包文件"></p>
 </li>
 <li><p>从Hashcat官网（<a target="_blank" rel="noopener" href="https://hashcat.net/">https://hashcat.net</a>）下载Hashcat，解压缩到同一目录下</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33bb58cb8da5c8fea3af.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33bb58cb8da5c8fea3af.png" alt="Hashcat下载"></p>
 </li>
 <li><p>从Nvidia官网（<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-12-8-1-download-archive?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_local">CUDA Toolkit 12.8 Update 1 Downloads | NVIDIA Developer</a>）下载CUDA开发包</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b2.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b2.png" alt="CUDA下载"></p>
 </li>
 <li><p>安装CUDA开发工具包，所有选项默认即可</p>
 </li>
 <li><p>搜索Nsight Monitor并右键，以管理员身份运行</p>
-<p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b1.png" alt="image.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c33bc58cb8da5c8fea3b1.png" alt="运行Nsight Monitor"></p>
 </li>
 <li><p>重启电脑后，打开RoadShow文件夹，右键，在终端打开，输入</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 22000 [包名称] [密码字典名称]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 22000 [包名称] [密码字典名称]</span><br></pre></td></tr></table></figure>
 
 <p>注意：需要提前把握手包和密码字典放在与Hashcat同一目录下</p>
 </li>
 <li><p>破解成功，可以在此处看到密码</p>
-<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea088.png" alt="72f70a01853a44a34b4c0e48b3d93de8.png"></p>
+<p><img src="https://pic1.imgdb.cn/item/682c336258cb8da5c8fea088.png" alt="密码破解成功"></p>
 </li>
 </ol>
 
@@ -394,7 +401,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E5%AF%BC%E8%AE%BA%E5%AE%9E%E8%B7%B5-Road-Show-Project-doc-v1-0-2025-05-18"><span class="toc-number">1.</span> <span class="toc-text">网络空间安全导论实践-Road Show-Project-doc-v1.0-2025-05-18</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">目录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9C%A8%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux%EF%BC%88%E4%BB%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">一.在个人电脑上安装Kali Linux（以虚拟机环境为例）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">二.无线网卡的配置与使用教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E4%BD%BF%E7%94%A8Airodump%E7%9B%91%E5%90%AC%E9%99%84%E8%BF%91%E7%9A%84%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">2.3.</span> <span class="toc-text">三.使用Airodump监听附近的无线局域网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E4%BD%BF%E7%94%A8Aireplay%E6%94%BB%E5%87%BB%E5%AF%B9%E6%96%B9%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8A%A0%E5%BF%AB%E6%8A%93%E5%8C%85%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.4.</span> <span class="toc-text">四.使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94-%E4%BD%BF%E7%94%A8Hashcat%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%9B%E8%A1%8C%E7%A0%B4%E8%A7%A3%EF%BC%8C%E8%8E%B7%E5%BE%97%E5%AF%86%E7%A0%81"><span class="toc-number">2.5.</span> <span class="toc-text">五.使用Hashcat和密码字典对数据包进行破解，获得密码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux%EF%BC%88%E4%BB%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">在个人电脑上安装Kali Linux（以虚拟机环境为例）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85VMware-Workstation-Pro"><span class="toc-number">3.1.</span> <span class="toc-text">1.安装VMware Workstation Pro</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-VMware-Workstation-Pro-%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%89%88"><span class="toc-number">3.1.1.</span> <span class="toc-text">下载 VMware Workstation Pro 个人免费版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-Windows-%E4%B8%8A%E5%AE%89%E8%A3%85-VMware-Workstation-Pro"><span class="toc-number">3.1.2.</span> <span class="toc-text">在 Windows 上安装 VMware Workstation Pro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8VMware%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux"><span class="toc-number">3.1.3.</span> <span class="toc-text">在VMware上安装Kali Linux</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">无线网卡的配置与使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B4%AD%E4%B9%B0%E9%80%82%E7%94%A8%E4%BA%8EKali-Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E7%9A%84%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">4.1.</span> <span class="toc-text">1.购买适用于Kali Linux虚拟机环境使用的无线网卡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%90%AF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">4.2.</span> <span class="toc-text">2.启用无线网卡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A1%AE%E8%AE%A4%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E8%AE%BE%E7%BD%AE%E6%AD%A3%E7%A1%AE"><span class="toc-number">4.3.</span> <span class="toc-text">3.确认无线网卡设置正确</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Airodump%E7%9B%91%E5%90%AC%E9%99%84%E8%BF%91%E7%9A%84%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85"><span class="toc-number">5.</span> <span class="toc-text">使用Airodump监听附近的无线局域网并进行抓包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Aireplay%E6%94%BB%E5%87%BB%E5%AF%B9%E6%96%B9%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8A%A0%E5%BF%AB%E6%8A%93%E5%8C%85%E8%BF%9B%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Hashcat%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%9B%E8%A1%8C%E7%A0%B4%E8%A7%A3%EF%BC%8C%E8%8E%B7%E5%BE%97%E5%AF%86%E7%A0%81"><span class="toc-number">7.</span> <span class="toc-text">使用Hashcat和密码字典对数据包进行破解，获得密码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E6%AD%A4%E6%AD%A5%E9%AA%A4%E9%9C%80%E8%A6%81%E8%89%AF%E5%A5%BD%E7%9A%84GPU%E6%94%AF%E6%8C%81%E6%89%8D%E8%83%BD%E5%BF%AB%E9%80%9F%E5%AE%8C%E6%88%90"><span class="toc-number">7.1.</span> <span class="toc-text">注意：此步骤需要良好的GPU支持才能快速完成</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9C%A8%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux%EF%BC%88%E4%BB%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">1. 在个人电脑上安装Kali Linux（以虚拟机环境为例）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85VMware-Workstation-Pro"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 安装VMware Workstation Pro</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-VMware-Workstation-Pro-%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E7%89%88"><span class="toc-number">2.1.1.</span> <span class="toc-text">下载 VMware Workstation Pro 个人免费版</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8-Windows-%E4%B8%8A%E5%AE%89%E8%A3%85-VMware-Workstation-Pro"><span class="toc-number">2.1.2.</span> <span class="toc-text">在 Windows 上安装 VMware Workstation Pro</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9C%A8VMware%E4%B8%8A%E5%AE%89%E8%A3%85Kali-Linux"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 在VMware上安装Kali Linux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E7%9A%84%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">2. 无线网卡的配置与使用教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%B4%AD%E4%B9%B0%E9%80%82%E7%94%A8%E4%BA%8EKali-Linux%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8%E7%9A%84%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 购买适用于Kali Linux虚拟机环境使用的无线网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%90%AF%E7%94%A8%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 启用无线网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%A1%AE%E8%AE%A4%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E8%AE%BE%E7%BD%AE%E6%AD%A3%E7%A1%AE"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 确认无线网卡设置正确</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8Airodump%E7%9B%91%E5%90%AC%E9%99%84%E8%BF%91%E7%9A%84%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E5%B9%B6%E8%BF%9B%E8%A1%8C%E6%8A%93%E5%8C%85"><span class="toc-number">4.</span> <span class="toc-text">3. 使用Airodump监听附近的无线局域网并进行抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8Aireplay%E6%94%BB%E5%87%BB%E5%AF%B9%E6%96%B9%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%9A%84%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E5%8A%A0%E5%BF%AB%E6%8A%93%E5%8C%85%E8%BF%9B%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">4. 使用Aireplay攻击对方无线局域网的连接设备，加快抓包进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BD%BF%E7%94%A8Hashcat%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%9B%E8%A1%8C%E7%A0%B4%E8%A7%A3%EF%BC%8C%E8%8E%B7%E5%BE%97%E5%AF%86%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text">5. 使用Hashcat和密码字典对数据包进行破解，获得密码</span></a></li></ol>
       </div>
     
 
